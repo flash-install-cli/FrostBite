@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CLI Reference - Frostbite</title>
   <meta name="description" content="Complete documentation for the Frostbite command line interface.">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="../favicon.ico">
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="css/docs.css">
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
           <li><a href="../index.html#usage">Usage</a></li>
           <li><a href="../index.html#examples">Examples</a></li>
           <li><a href="../index.html#docs">Documentation</a></li>
-          <li><a href="https://github.com/yourusername/frostbite" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://github.com/flash-install-cli/FrostBite" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
         </ul>
         <div class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
@@ -57,7 +57,7 @@
           <li><a href="runtime.html">Runtime API</a></li>
           <li><a href="security.html">Security Guide</a></li>
         </ul>
-        
+
         <h4>CLI Commands</h4>
         <ul>
           <li><a href="#lock">lock</a></li>
@@ -67,23 +67,23 @@
         </ul>
       </div>
     </aside>
-    
+
     <main class="docs-content">
       <h1>CLI Reference</h1>
       <p class="docs-intro">
         Frostbite provides a powerful command line interface for encrypting, decrypting, and managing encrypted files.
         This reference documents all available commands and options.
       </p>
-      
+
       <div class="docs-section" id="lock">
         <h2>lock</h2>
         <p>Encrypts a file or directory using AES-256-GCM encryption.</p>
-        
+
         <h3>Usage</h3>
         <div class="code-block">
           <pre><code>frostbite lock &lt;path&gt; [options]</code></pre>
         </div>
-        
+
         <h3>Arguments</h3>
         <table class="docs-table">
           <thead>
@@ -99,7 +99,7 @@
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Options</h3>
         <table class="docs-table">
           <thead>
@@ -127,7 +127,7 @@
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Examples</h3>
         <div class="code-block">
           <pre><code># Encrypt a file
@@ -147,16 +147,16 @@ frostbite lock config.json --key mySecretKey --license my-license-key
 frostbite lock ./src --dry-run</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="unlock">
         <h2>unlock</h2>
         <p>Decrypts a file or directory that was encrypted with Frostbite.</p>
-        
+
         <h3>Usage</h3>
         <div class="code-block">
           <pre><code>frostbite unlock &lt;path&gt; [options]</code></pre>
         </div>
-        
+
         <h3>Arguments</h3>
         <table class="docs-table">
           <thead>
@@ -172,7 +172,7 @@ frostbite lock ./src --dry-run</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Options</h3>
         <table class="docs-table">
           <thead>
@@ -200,7 +200,7 @@ frostbite lock ./src --dry-run</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Examples</h3>
         <div class="code-block">
           <pre><code># Decrypt a file
@@ -220,16 +220,16 @@ frostbite unlock config.json.fbz --key mySecretKey --license my-license-key
 frostbite unlock ./src --dry-run</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="rekey">
         <h2>rekey</h2>
         <p>Re-encrypts files with a new key, allowing for key rotation without decrypting to disk.</p>
-        
+
         <h3>Usage</h3>
         <div class="code-block">
           <pre><code>frostbite rekey &lt;path&gt; [options]</code></pre>
         </div>
-        
+
         <h3>Arguments</h3>
         <table class="docs-table">
           <thead>
@@ -245,7 +245,7 @@ frostbite unlock ./src --dry-run</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Options</h3>
         <table class="docs-table">
           <thead>
@@ -285,7 +285,7 @@ frostbite unlock ./src --dry-run</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Examples</h3>
         <div class="code-block">
           <pre><code># Re-encrypt a file
@@ -306,16 +306,16 @@ frostbite rekey config.json.fbz --old-key oldSecret --new-key newSecret --old-li
 frostbite rekey ./src --old-key oldSecret --new-key newSecret --dry-run</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="watch">
         <h2>watch</h2>
         <p>Watches files and automatically encrypts/decrypts them when they change. Ideal for live project environments.</p>
-        
+
         <h3>Usage</h3>
         <div class="code-block">
           <pre><code>frostbite watch &lt;path&gt; [options]</code></pre>
         </div>
-        
+
         <h3>Arguments</h3>
         <table class="docs-table">
           <thead>
@@ -331,7 +331,7 @@ frostbite rekey ./src --old-key oldSecret --new-key newSecret --dry-run</code></
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Options</h3>
         <table class="docs-table">
           <thead>
@@ -363,7 +363,7 @@ frostbite rekey ./src --old-key oldSecret --new-key newSecret --dry-run</code></
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Examples</h3>
         <div class="code-block">
           <pre><code># Watch a directory and automatically decrypt files
@@ -395,10 +395,10 @@ frostbite watch ./config --key mySecretKey --license my-license-key</code></pre>
           <div class="footer-column">
             <h4>Project</h4>
             <ul>
-              <li><a href="https://github.com/yourusername/frostbite">GitHub</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite">GitHub</a></li>
               <li><a href="https://www.npmjs.com/package/frostbite">npm</a></li>
-              <li><a href="https://github.com/yourusername/frostbite/issues">Issues</a></li>
-              <li><a href="https://github.com/yourusername/frostbite/releases">Releases</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/issues">Issues</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/releases">Releases</a></li>
             </ul>
           </div>
           <div class="footer-column">
@@ -413,9 +413,9 @@ frostbite watch ./config --key mySecretKey --license my-license-key</code></pre>
           <div class="footer-column">
             <h4>Community</h4>
             <ul>
-              <li><a href="https://github.com/yourusername/frostbite/discussions">Discussions</a></li>
-              <li><a href="https://github.com/yourusername/frostbite/blob/main/CONTRIBUTING.md">Contributing</a></li>
-              <li><a href="https://github.com/yourusername/frostbite/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/discussions">Discussions</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/blob/main/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
             </ul>
           </div>
         </div>
@@ -423,7 +423,7 @@ frostbite watch ./config --key mySecretKey --license my-license-key</code></pre>
       <div class="footer-bottom">
         <p>&copy; 2023 Frostbite. Released under the MIT License.</p>
         <div class="social-links">
-          <a href="https://github.com/yourusername/frostbite"><i class="fab fa-github"></i></a>
+          <a href="https://github.com/flash-install-cli/FrostBite"><i class="fab fa-github"></i></a>
           <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
         </div>
       </div>

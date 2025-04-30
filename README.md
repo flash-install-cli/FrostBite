@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yourusername/frostbite/actions"><img src="https://github.com/yourusername/frostbite/workflows/Tests/badge.svg" alt="Build Status"></a>
+  <a href="https://github.com/flash-install-cli/FrostBite/actions"><img src="https://github.com/flash-install-cli/FrostBite/workflows/Tests/badge.svg" alt="Build Status"></a>
   <a href="https://www.npmjs.com/package/frostbite"><img src="https://img.shields.io/npm/v/frostbite.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/frostbite"><img src="https://img.shields.io/npm/dm/frostbite.svg" alt="Downloads"></a>
-  <a href="https://github.com/yourusername/frostbite/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/frostbite.svg" alt="License"></a>
+  <a href="https://github.com/flash-install-cli/FrostBite/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/frostbite.svg" alt="License"></a>
 </p>
 
 Frostbite is a powerful file encryption utility that selectively encrypts and decrypts files or folders in a project to protect sensitive code or assets.
@@ -287,7 +287,7 @@ Check out the [examples directory](examples/) for more usage examples:
 
 ## Documentation
 
-For more detailed documentation, visit our [GitHub Pages site](https://yourusername.github.io/frostbite/).
+For more detailed documentation, visit our [GitHub Pages site](https://flash-install-cli.github.io/FrostBite/).
 
 ## Security Notes
 

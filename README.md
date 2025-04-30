@@ -33,6 +33,7 @@ Frostbite is a powerful file encryption utility that selectively encrypts and de
 - Live project support with runtime API
 - File watching for automatic encryption/decryption
 - Memory-only decryption for sensitive data
+- Custom file icons for encrypted .fbz files
 
 ## Installation
 
@@ -284,6 +285,17 @@ dist/**
 Check out the [examples directory](examples/) for more usage examples:
 
 - [Live Project Integration](examples/live-project/): Example of using Frostbite in a live Node.js application
+
+## File Icons
+
+Frostbite includes custom file icons for `.fbz` files to make them easily recognizable in your file explorer:
+
+![Frostbite File Icon](assets/frostbite-file.svg)
+
+To install the file icons on your system:
+
+1. Go to the `desktop` directory
+2. Follow the instructions in the README.md file for your operating system
 
 ## Documentation
 

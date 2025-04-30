@@ -1,0 +1,9 @@
+{
+  "apiKey": "test-api-key-123",
+  "databaseUrl": "postgres://user:password@localhost:5432/testdb",
+  "secretToken": "super-secret-token",
+  "adminCredentials": {
+    "username": "admin",
+    "password": "admin123"
+  }
+}

@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API Reference - Frostbite</title>
   <meta name="description" content="Detailed API documentation for the Frostbite programmatic interface.">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="../favicon.ico">
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="css/docs.css">
-  
+  <link rel="stylesheet" href="../css/frost-effect.css">
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +58,7 @@
           <li><a href="runtime.html">Runtime API</a></li>
           <li><a href="security.html">Security Guide</a></li>
         </ul>
-        
+
         <h4>API Methods</h4>
         <ul>
           <li><a href="#encrypt">encrypt()</a></li>
@@ -70,25 +71,25 @@
         </ul>
       </div>
     </aside>
-    
+
     <main class="docs-content">
       <h1>API Reference</h1>
       <p class="docs-intro">
         Frostbite provides a comprehensive programmatic API for encrypting, decrypting, and managing encrypted files in your Node.js applications.
         This reference documents all available methods and options.
       </p>
-      
+
       <div class="docs-section" id="encrypt">
         <h2>encrypt()</h2>
         <p>Encrypts a file or directory using AES-256-GCM encryption.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const result = await frostbite.encrypt(targetPath, options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -126,7 +127,7 @@ const result = await frostbite.encrypt(targetPath, options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to an object with the following properties:</p>
         <table class="docs-table">
@@ -150,7 +151,7 @@ const result = await frostbite.encrypt(targetPath, options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -162,7 +163,7 @@ async function encryptConfig() {
       license: 'optional-license-key',
       dryRun: false
     });
-    
+
     console.log(`Encrypted ${result.files.length} files`);
     console.log(`Skipped ${result.skipped.length} files`);
   } catch (error) {
@@ -171,18 +172,18 @@ async function encryptConfig() {
 }</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="decrypt">
         <h2>decrypt()</h2>
         <p>Decrypts a file or directory that was encrypted with Frostbite.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const result = await frostbite.decrypt(targetPath, options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -220,7 +221,7 @@ const result = await frostbite.decrypt(targetPath, options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to an object with the following properties:</p>
         <table class="docs-table">
@@ -244,7 +245,7 @@ const result = await frostbite.decrypt(targetPath, options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -256,7 +257,7 @@ async function decryptConfig() {
       license: 'optional-license-key',
       dryRun: false
     });
-    
+
     console.log(`Decrypted ${result.files.length} files`);
     console.log(`Skipped ${result.skipped.length} files`);
   } catch (error) {
@@ -265,18 +266,18 @@ async function decryptConfig() {
 }</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="rekey">
         <h2>rekey()</h2>
         <p>Re-encrypts files with a new key, allowing for key rotation without decrypting to disk.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const result = await frostbite.rekey(targetPath, options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -324,7 +325,7 @@ const result = await frostbite.rekey(targetPath, options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to an object with the following properties:</p>
         <table class="docs-table">
@@ -353,7 +354,7 @@ const result = await frostbite.rekey(targetPath, options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -367,9 +368,9 @@ async function rekeyConfig() {
       newLicense: 'new-license-key',
       dryRun: false
     });
-    
+
     console.log(`Re-encrypted ${result.files.length} files`);
-    
+
     if (result.failed && result.failed.length > 0) {
       console.error(`Failed to re-encrypt ${result.failed.length} files`);
     }
@@ -379,18 +380,18 @@ async function rekeyConfig() {
 }</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="encryptData">
         <h2>encryptData()</h2>
         <p>Encrypts a buffer using AES-256-GCM encryption.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const encryptedBuffer = await frostbite.encryptData(buffer, key, license);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -418,10 +419,10 @@ const encryptedBuffer = await frostbite.encryptData(buffer, key, license);</code
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to a Buffer containing the encrypted data.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -431,13 +432,13 @@ async function encryptConfigData() {
   try {
     // Read the data to encrypt
     const data = fs.readFileSync('./config.json');
-    
+
     // Encrypt the data
     const encryptedData = await frostbite.encryptData(data, 'my-secret-key', 'optional-license-key');
-    
+
     // Save the encrypted data
     fs.writeFileSync('./config.json.fbz', encryptedData);
-    
+
     console.log('Data encrypted successfully');
   } catch (error) {
     console.error('Encryption failed:', error);
@@ -445,18 +446,18 @@ async function encryptConfigData() {
 }</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="decryptData">
         <h2>decryptData()</h2>
         <p>Decrypts a buffer that was encrypted with Frostbite.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const decryptedBuffer = await frostbite.decryptData(buffer, key, license);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -484,10 +485,10 @@ const decryptedBuffer = await frostbite.decryptData(buffer, key, license);</code
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to a Buffer containing the decrypted data.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -497,13 +498,13 @@ async function decryptConfigData() {
   try {
     // Read the encrypted data
     const encryptedData = fs.readFileSync('./config.json.fbz');
-    
+
     // Decrypt the data
     const decryptedData = await frostbite.decryptData(encryptedData, 'my-secret-key', 'optional-license-key');
-    
+
     // Parse the decrypted data
     const config = JSON.parse(decryptedData.toString('utf8'));
-    
+
     console.log('Config:', config);
   } catch (error) {
     console.error('Decryption failed:', error);
@@ -511,18 +512,18 @@ async function decryptConfigData() {
 }</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="rekeyData">
         <h2>rekeyData()</h2>
         <p>Re-encrypts a buffer with a new key.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const reEncryptedBuffer = await frostbite.rekeyData(buffer, oldKey, newKey, oldLicense, newLicense);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -560,10 +561,10 @@ const reEncryptedBuffer = await frostbite.rekeyData(buffer, oldKey, newKey, oldL
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to a Buffer containing the re-encrypted data.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -573,7 +574,7 @@ async function rekeyConfigData() {
   try {
     // Read the encrypted data
     const encryptedData = fs.readFileSync('./config.json.fbz');
-    
+
     // Re-encrypt the data with a new key
     const reEncryptedData = await frostbite.rekeyData(
       encryptedData,
@@ -582,10 +583,10 @@ async function rekeyConfigData() {
       'old-license-key',
       'new-license-key'
     );
-    
+
     // Save the re-encrypted data
     fs.writeFileSync('./config.json.fbz', reEncryptedData);
-    
+
     console.log('Data re-encrypted successfully');
   } catch (error) {
     console.error('Re-encryption failed:', error);
@@ -593,18 +594,18 @@ async function rekeyConfigData() {
 }</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="createRuntime">
         <h2>createRuntime()</h2>
         <p>Creates a runtime instance for live project environments.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const runtime = frostbite.createRuntime(options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -632,10 +633,10 @@ const runtime = frostbite.createRuntime(options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a FrostbiteRuntime instance. See the <a href="runtime.html">Runtime API</a> documentation for details on the available methods.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -646,22 +647,22 @@ async function main() {
     key: process.env.FROSTBITE_KEY,
     license: process.env.FROSTBITE_LICENSE
   });
-  
+
   // Initialize the runtime
   await runtime.initialize();
-  
+
   try {
     // Decrypt a file without writing to disk
     const config = await runtime.requireJSON('./config.json.fbz');
-    
+
     console.log('Config loaded:', config);
-    
+
     // Watch files for changes
     await runtime.watch('./config', {
       autoDecrypt: true,
       autoEncrypt: false
     });
-    
+
     console.log('Watching config directory for changes');
   } catch (error) {
     console.error('Error:', error);
@@ -722,5 +723,6 @@ async function main() {
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/frost-effect.js"></script>
 </body>
 </html>

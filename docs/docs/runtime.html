@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Runtime API - Frostbite</title>
   <meta name="description" content="Documentation for the Frostbite Runtime API for live project integration.">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="../favicon.ico">
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="css/docs.css">
-  
+  <link rel="stylesheet" href="../css/frost-effect.css">
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +58,7 @@
           <li class="active"><a href="runtime.html">Runtime API</a></li>
           <li><a href="security.html">Security Guide</a></li>
         </ul>
-        
+
         <h4>Runtime Methods</h4>
         <ul>
           <li><a href="#createRuntime">createRuntime()</a></li>
@@ -71,25 +72,25 @@
         </ul>
       </div>
     </aside>
-    
+
     <main class="docs-content">
       <h1>Runtime API</h1>
       <p class="docs-intro">
         The Frostbite Runtime API provides specialized functionality for using encrypted files in live project environments.
         It allows you to decrypt files in memory without writing sensitive data to disk, watch files for changes, and more.
       </p>
-      
+
       <div class="docs-section" id="createRuntime">
         <h2>createRuntime()</h2>
         <p>Creates a new FrostbiteRuntime instance for live project environments.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
 
 const runtime = frostbite.createRuntime(options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -117,10 +118,10 @@ const runtime = frostbite.createRuntime(options);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a FrostbiteRuntime instance with the methods described in this documentation.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const frostbite = require('frostbite');
@@ -132,19 +133,19 @@ const runtime = frostbite.createRuntime({
 });</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="initialize">
         <h2>initialize()</h2>
         <p>Initializes the runtime by deriving the encryption key.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>await runtime.initialize();</code></pre>
         </div>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to the runtime instance for chaining.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>const runtime = frostbite.createRuntime({
@@ -155,16 +156,16 @@ const runtime = frostbite.createRuntime({
 await runtime.initialize();</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="decryptFile">
         <h2>decryptFile()</h2>
         <p>Decrypts a file and returns its contents without writing to disk.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const content = await runtime.decryptFile(filePath, options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -197,10 +198,10 @@ await runtime.initialize();</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to a Buffer containing the decrypted content, or a string if an encoding is specified.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>// Initialize the runtime
@@ -215,16 +216,16 @@ const textContent = await runtime.decryptFile('./config/text-file.txt.fbz', {
 });</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="requireJSON">
         <h2>requireJSON()</h2>
         <p>Decrypts a JSON file and parses its contents.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const jsonData = await runtime.requireJSON(filePath, options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -252,10 +253,10 @@ const textContent = await runtime.decryptFile('./config/text-file.txt.fbz', {
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to the parsed JSON object.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>// Initialize the runtime
@@ -268,16 +269,16 @@ console.log(`Database URL: ${config.database.url}`);
 console.log(`API Key: ${config.apiKey}`);</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="watch">
         <h2>watch()</h2>
         <p>Watches a file or directory for changes and automatically encrypts/decrypts files.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>const watcher = await runtime.watch(targetPath, options);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -315,10 +316,10 @@ console.log(`API Key: ${config.apiKey}`);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves to a watcher object.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>// Initialize the runtime
@@ -330,7 +331,7 @@ await runtime.watch('./config', {
   autoEncrypt: true,  // Encrypt files when they change
   onChange: (action, filePath, content) => {
     console.log(`File ${filePath} was ${action}ed`);
-    
+
     // Reload configuration if needed
     if (filePath.includes('config.json')) {
       // Handle configuration change
@@ -339,16 +340,16 @@ await runtime.watch('./config', {
 });</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="unwatch">
         <h2>unwatch()</h2>
         <p>Stops watching a file or directory.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>await runtime.unwatch(targetPath);</code></pre>
         </div>
-        
+
         <h3>Parameters</h3>
         <table class="docs-table">
           <thead>
@@ -366,10 +367,10 @@ await runtime.watch('./config', {
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves when the watcher is closed.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>// Start watching
@@ -379,53 +380,53 @@ await runtime.watch('./config');
 await runtime.unwatch('./config');</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="clearCache">
         <h2>clearCache()</h2>
         <p>Clears the decrypted content cache.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>runtime.clearCache();</code></pre>
         </div>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>// Clear the cache to force re-decryption on next access
 runtime.clearCache();</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section" id="close">
         <h2>close()</h2>
         <p>Closes the runtime and cleans up resources.</p>
-        
+
         <h3>Syntax</h3>
         <div class="code-block">
           <pre><code>await runtime.close();</code></pre>
         </div>
-        
+
         <h3>Return Value</h3>
         <p>Returns a Promise that resolves when all resources are cleaned up.</p>
-        
+
         <h3>Example</h3>
         <div class="code-block">
           <pre><code>// When shutting down the application
 process.on('SIGTERM', async () => {
   console.log('Shutting down...');
-  
+
   // Close the runtime to clean up resources
   await runtime.close();
-  
+
   process.exit(0);
 });</code></pre>
         </div>
       </div>
-      
+
       <div class="docs-section">
         <h2>Live Project Example</h2>
         <p>Here's a complete example of using the Runtime API in a live project:</p>
-        
+
         <div class="code-block">
           <pre><code>const express = require('express');
 const frostbite = require('frostbite');
@@ -442,42 +443,42 @@ const runtime = frostbite.createRuntime({
 async function startServer() {
   // Initialize the runtime
   await runtime.initialize();
-  
+
   try {
     // Load configuration
     const config = await runtime.requireJSON('./config/production.json');
-    
+
     // Set up middleware
     app.use(express.json());
-    
+
     // Set up routes
     app.get('/api/status', (req, res) => {
       res.json({ status: 'ok' });
     });
-    
+
     // Start watching for configuration changes
     await runtime.watch('./config', {
       autoDecrypt: true,
       onChange: async (action, filePath) => {
         if (filePath.includes('production.json')) {
           console.log('Configuration changed, reloading...');
-          
+
           // Reload configuration
           const newConfig = await runtime.requireJSON('./config/production.json', {
             cache: false  // Force re-reading the file
           });
-          
+
           // Update application with new configuration
           // ...
         }
       }
     });
-    
+
     // Start the server
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
-    
+
     // Handle graceful shutdown
     process.on('SIGTERM', async () => {
       console.log('Shutting down...');
@@ -546,5 +547,6 @@ startServer();</code></pre>
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/frost-effect.js"></script>
 </body>
 </html>

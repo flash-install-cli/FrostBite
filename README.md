@@ -292,10 +292,13 @@ Frostbite includes custom file icons for `.fbz` files to make them easily recogn
 
 ![Frostbite File Icon](assets/frostbite-file.svg)
 
-To install the file icons on your system:
+The file icons are automatically installed during package installation. After installing Frostbite:
 
-1. Go to the `desktop` directory
-2. Follow the instructions in the README.md file for your operating system
+- **Windows**: `.fbz` files will show the Frostbite icon and can be opened with Frostbite
+- **macOS**: `.fbz` files will be associated with Frostbite and display the custom icon
+- **Linux**: `.fbz` files will have the Frostbite MIME type and icon
+
+You may need to log out and back in (or restart your file explorer) for the changes to take effect.
 
 ## Documentation
 

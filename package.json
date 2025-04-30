@@ -1,5 +1,5 @@
 {
-  "name": "@flash-install/frostbite",
+  "name": "frostbite-encrypt",
   "version": "1.0.0",
   "description": "Selectively encrypt and decrypt files or folders to protect sensitive code or assets",
   "main": "index.js",

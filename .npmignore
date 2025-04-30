@@ -1,0 +1,32 @@
+# Development files
+.git/
+.github/
+.gitignore
+.npmignore
+
+# Test files
+test/
+test-*
+coverage/
+.nyc_output/
+
+# Documentation source files
+docs/
+
+# Examples
+examples/
+
+# Build and temp files
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db

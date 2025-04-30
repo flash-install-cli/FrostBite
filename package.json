@@ -6,6 +6,24 @@
   "bin": {
     "frostbite": "./bin/cli.js"
   },
+  "files": [
+    "bin/",
+    "lib/",
+    "index.js",
+    "desktop/",
+    "assets/",
+    "scripts/post-install.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flash-install-cli/FrostBite.git"
+  },
+  "homepage": "https://flash-install-cli.github.io/FrostBite/",
+  "bugs": {
+    "url": "https://github.com/flash-install-cli/FrostBite/issues"
+  },
   "scripts": {
     "test": "node test/test.js",
     "postinstall": "node scripts/post-install.js"

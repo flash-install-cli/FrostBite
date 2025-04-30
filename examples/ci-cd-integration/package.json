@@ -1,0 +1,14 @@
+{
+  "name": "frostbite-ci-cd-integration-example",
+  "version": "1.0.0",
+  "description": "Example of integrating Frostbite into a CI/CD pipeline",
+  "main": "app.js",
+  "scripts": {
+    "encrypt": "node ../../bin/cli.js lock config/production.json --key example-key-123",
+    "decrypt": "node ../../bin/cli.js unlock config/production.json.fbz --key example-key-123",
+    "build": "echo 'Building application...'",
+    "deploy": "echo 'Deploying application...'",
+    "start": "node app.js"
+  },
+  "private": true
+}

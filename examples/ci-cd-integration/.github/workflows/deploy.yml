@@ -1,0 +1,43 @@
+name: Deploy Application
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Install frostbite
+        run: npm install -g frostbite
+        
+      - name: Decrypt configuration files
+        run: node scripts/decrypt-config.js
+        env:
+          FROSTBITE_KEY: ${{ secrets.FROSTBITE_KEY }}
+        
+      - name: Build application
+        run: npm run build
+        
+      - name: Deploy to production
+        run: npm run deploy
+        
+      - name: Clean up decrypted files
+        run: |
+          # Remove any decrypted configuration files
+          find config -type f -not -name "*.fbz" -delete
+        
+      - name: Notify deployment success
+        run: |
+          echo "Application deployed successfully!"

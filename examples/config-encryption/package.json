@@ -1,0 +1,12 @@
+{
+  "name": "frostbite-config-encryption-example",
+  "version": "1.0.0",
+  "description": "Example of using Frostbite to encrypt configuration files",
+  "main": "app.js",
+  "scripts": {
+    "encrypt": "node encrypt.js",
+    "decrypt": "node decrypt.js",
+    "start": "node app.js"
+  },
+  "private": true
+}

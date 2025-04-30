@@ -1,0 +1,14 @@
+{
+  "apiKey": "example-api-key-123",
+  "databaseUrl": "postgres://user:password@localhost:5432/mydb",
+  "jwtSecret": "super-secret-jwt-token-for-auth",
+  "adminCredentials": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "features": {
+    "enableAuth": true,
+    "enableLogging": true,
+    "enableCache": true
+  }
+}

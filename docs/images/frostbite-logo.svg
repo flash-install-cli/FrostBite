@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="#1E3A8A" />
+  <circle cx="256" cy="256" r="220" fill="#1E40AF" />
+  
+  <!-- Snowflake Pattern -->
+  <g transform="translate(256, 256)">
+    <!-- Main Snowflake Arms -->
+    <g stroke="#E0F2FE" stroke-width="12" stroke-linecap="round">
+      <!-- Vertical Line -->
+      <line x1="0" y1="-120" x2="0" y2="120" />
+      <!-- Horizontal Line -->
+      <line x1="-120" y1="0" x2="120" y2="0" />
+      <!-- Diagonal Lines -->
+      <line x1="-85" y1="-85" x2="85" y2="85" />
+      <line x1="-85" y1="85" x2="85" y2="-85" />
+    </g>
+    
+    <!-- Small Branches -->
+    <g stroke="#E0F2FE" stroke-width="8" stroke-linecap="round">
+      <!-- Top Branches -->
+      <line x1="0" y1="-120" x2="-20" y2="-140" />
+      <line x1="0" y1="-120" x2="20" y2="-140" />
+      <!-- Bottom Branches -->
+      <line x1="0" y1="120" x2="-20" y2="140" />
+      <line x1="0" y1="120" x2="20" y2="140" />
+      <!-- Left Branches -->
+      <line x1="-120" y1="0" x2="-140" y2="-20" />
+      <line x1="-120" y1="0" x2="-140" y2="20" />
+      <!-- Right Branches -->
+      <line x1="120" y1="0" x2="140" y2="-20" />
+      <line x1="120" y1="0" x2="140" y2="20" />
+      <!-- Diagonal Branches -->
+      <line x1="-85" y1="-85" x2="-105" y2="-95" />
+      <line x1="-85" y1="-85" x2="-95" y2="-105" />
+      <line x1="85" y1="85" x2="105" y2="95" />
+      <line x1="85" y1="85" x2="95" y2="105" />
+      <line x1="-85" y1="85" x2="-105" y2="95" />
+      <line x1="-85" y1="85" x2="-95" y2="105" />
+      <line x1="85" y1="-85" x2="105" y2="-95" />
+      <line x1="85" y1="-85" x2="95" y2="-105" />
+    </g>
+  </g>
+  
+  <!-- Lock Icon in Center -->
+  <g transform="translate(256, 256) scale(0.6)">
+    <!-- Lock Body -->
+    <rect x="-60" y="-10" width="120" height="100" rx="10" fill="#BFDBFE" />
+    <!-- Lock Shackle -->
+    <path d="M-30,-10 L-30,-50 C-30,-80 30,-80 30,-50 L30,-10" stroke="#BFDBFE" stroke-width="24" fill="none" stroke-linecap="round" />
+    <!-- Keyhole -->
+    <circle cx="0" cy="40" r="15" fill="#1E40AF" />
+    <rect x="-5" y="40" width="10" height="25" fill="#1E40AF" />
+  </g>
+  
+  <!-- Frost Effect -->
+  <g opacity="0.7">
+    <circle cx="256" cy="256" r="240" fill="none" stroke="#E0F2FE" stroke-width="2" />
+    <circle cx="256" cy="256" r="210" fill="none" stroke="#E0F2FE" stroke-width="1" />
+    <circle cx="256" cy="256" r="180" fill="none" stroke="#E0F2FE" stroke-width="1" />
+  </g>
+  
+  <!-- Small Ice Crystals -->
+  <g fill="#E0F2FE">
+    <circle cx="180" cy="120" r="4" />
+    <circle cx="330" cy="140" r="3" />
+    <circle cx="150" cy="300" r="5" />
+    <circle cx="350" cy="280" r="4" />
+    <circle cx="200" cy="380" r="3" />
+    <circle cx="300" cy="400" r="2" />
+    <circle cx="400" cy="200" r="3" />
+    <circle cx="100" cy="220" r="4" />
+  </g>
+</svg>

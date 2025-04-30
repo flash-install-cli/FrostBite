@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/flash-install-cli/FrostBite/actions"><img src="https://github.com/flash-install-cli/FrostBite/workflows/Tests/badge.svg" alt="Build Status"></a>
+  <a href="https://github.com/flash-install-cli/FrostBite/actions"><img src="https://github.com/flash-install-cli/FrostBite/actions/workflows/tests.yml/badge.svg" alt="Build Status"></a>
   <a href="https://www.npmjs.com/package/frostbite"><img src="https://img.shields.io/npm/v/frostbite.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/frostbite"><img src="https://img.shields.io/npm/dm/frostbite.svg" alt="Downloads"></a>
   <a href="https://github.com/flash-install-cli/FrostBite/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/frostbite.svg" alt="License"></a>

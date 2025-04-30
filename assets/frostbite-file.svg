@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- File Background -->
+  <path d="M96 32C78.3 32 64 46.3 64 64V448C64 465.7 78.3 480 96 480H416C433.7 480 448 465.7 448 448V160H320C302.3 160 288 145.7 288 128V32H96Z" fill="#F0F9FF"/>
+  <path d="M384 32H288V128C288 145.7 302.3 160 320 160H416L384 32Z" fill="#DBEAFE"/>
+  
+  <!-- Snowflake Pattern (Smaller) -->
+  <g transform="translate(256, 300) scale(0.7)">
+    <!-- Main Snowflake Arms -->
+    <g stroke="#1E40AF" stroke-width="12" stroke-linecap="round">
+      <!-- Vertical Line -->
+      <line x1="0" y1="-120" x2="0" y2="120" />
+      <!-- Horizontal Line -->
+      <line x1="-120" y1="0" x2="120" y2="0" />
+      <!-- Diagonal Lines -->
+      <line x1="-85" y1="-85" x2="85" y2="85" />
+      <line x1="-85" y1="85" x2="85" y2="-85" />
+    </g>
+    
+    <!-- Small Branches -->
+    <g stroke="#1E40AF" stroke-width="8" stroke-linecap="round">
+      <!-- Top Branches -->
+      <line x1="0" y1="-120" x2="-20" y2="-140" />
+      <line x1="0" y1="-120" x2="20" y2="-140" />
+      <!-- Bottom Branches -->
+      <line x1="0" y1="120" x2="-20" y2="140" />
+      <line x1="0" y1="120" x2="20" y2="140" />
+      <!-- Left Branches -->
+      <line x1="-120" y1="0" x2="-140" y2="-20" />
+      <line x1="-120" y1="0" x2="-140" y2="20" />
+      <!-- Right Branches -->
+      <line x1="120" y1="0" x2="140" y2="-20" />
+      <line x1="120" y1="0" x2="140" y2="20" />
+      <!-- Diagonal Branches -->
+      <line x1="-85" y1="-85" x2="-105" y2="-95" />
+      <line x1="-85" y1="-85" x2="-95" y2="-105" />
+      <line x1="85" y1="85" x2="105" y2="95" />
+      <line x1="85" y1="85" x2="95" y2="105" />
+      <line x1="-85" y1="85" x2="-105" y2="95" />
+      <line x1="-85" y1="85" x2="-95" y2="105" />
+      <line x1="85" y1="-85" x2="105" y2="-95" />
+      <line x1="85" y1="-85" x2="95" y2="-105" />
+    </g>
+  </g>
+  
+  <!-- Lock Icon -->
+  <g transform="translate(256, 180) scale(0.5)">
+    <!-- Lock Body -->
+    <rect x="-60" y="-10" width="120" height="100" rx="10" fill="#1E40AF" />
+    <!-- Lock Shackle -->
+    <path d="M-30,-10 L-30,-50 C-30,-80 30,-80 30,-50 L30,-10" stroke="#1E40AF" stroke-width="24" fill="none" stroke-linecap="round" />
+    <!-- Keyhole -->
+    <circle cx="0" cy="40" r="15" fill="#F0F9FF" />
+    <rect x="-5" y="40" width="10" height="25" fill="#F0F9FF" />
+  </g>
+  
+  <!-- File Extension -->
+  <text x="256" y="420" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#1E40AF" text-anchor="middle">.FBZ</text>
+</svg>

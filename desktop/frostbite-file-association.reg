@@ -1,0 +1,20 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.fbz]
+@="FrostbiteEncryptedFile"
+"Content Type"="application/x-frostbite"
+
+[HKEY_CLASSES_ROOT\FrostbiteEncryptedFile]
+@="Frostbite Encrypted File"
+"FriendlyTypeName"="Frostbite Encrypted File"
+
+[HKEY_CLASSES_ROOT\FrostbiteEncryptedFile\DefaultIcon]
+@="%ProgramFiles%\\Frostbite\\frostbite-file.ico"
+
+[HKEY_CLASSES_ROOT\FrostbiteEncryptedFile\shell]
+
+[HKEY_CLASSES_ROOT\FrostbiteEncryptedFile\shell\open]
+@="Decrypt with Frostbite"
+
+[HKEY_CLASSES_ROOT\FrostbiteEncryptedFile\shell\open\command]
+@="\"C:\\Program Files\\Frostbite\\frostbite.exe\" unlock \"%1\""

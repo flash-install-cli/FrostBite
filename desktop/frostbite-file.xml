@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-frostbite">
+    <comment>Frostbite Encrypted File</comment>
+    <glob pattern="*.fbz"/>
+    <icon name="frostbite-file"/>
+  </mime-type>
+</mime-info>

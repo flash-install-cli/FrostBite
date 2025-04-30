@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Guide - Frostbite</title>
+  <meta name="description" content="Best practices for managing encryption keys and securing your data with Frostbite.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon.ico">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/docs.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="../index.html">
+            <img src="../images/frostbite-logo-64.png" alt="Frostbite Logo">
+            <span>Frostbite</span>
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#usage">Usage</a></li>
+          <li><a href="../index.html#examples">Examples</a></li>
+          <li><a href="../index.html#docs">Documentation</a></li>
+          <li><a href="https://github.com/flash-install-cli/FrostBite" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+        </ul>
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Documentation Content -->
+  <div class="docs-container">
+    <aside class="docs-sidebar">
+      <div class="docs-nav">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="cli.html">CLI Reference</a></li>
+          <li><a href="api.html">API Reference</a></li>
+          <li><a href="runtime.html">Runtime API</a></li>
+          <li class="active"><a href="security.html">Security Guide</a></li>
+        </ul>
+        
+        <h4>Security Topics</h4>
+        <ul>
+          <li><a href="#encryption">Encryption Details</a></li>
+          <li><a href="#key-management">Key Management</a></li>
+          <li><a href="#best-practices">Best Practices</a></li>
+          <li><a href="#ci-cd">CI/CD Security</a></li>
+          <li><a href="#key-rotation">Key Rotation</a></li>
+          <li><a href="#threat-model">Threat Model</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+    <main class="docs-content">
+      <h1>Security Guide</h1>
+      <p class="docs-intro">
+        This guide provides best practices for managing encryption keys and securing your data with Frostbite.
+        Following these recommendations will help you maintain a high level of security for your sensitive information.
+      </p>
+      
+      <div class="docs-section" id="encryption">
+        <h2>Encryption Details</h2>
+        <p>Frostbite uses industry-standard encryption algorithms to protect your data:</p>
+        
+        <h3>Encryption Algorithm</h3>
+        <p>Frostbite uses <strong>AES-256-GCM</strong> (Advanced Encryption Standard with 256-bit keys in Galois/Counter Mode) for all encryption operations. This provides:</p>
+        <ul>
+          <li><strong>Confidentiality</strong>: AES-256 is a symmetric encryption algorithm that ensures your data remains private.</li>
+          <li><strong>Integrity</strong>: GCM mode provides authentication, ensuring that encrypted data hasn't been tampered with.</li>
+          <li><strong>Performance</strong>: AES-256-GCM is hardware-accelerated on modern processors for efficient encryption/decryption.</li>
+        </ul>
+        
+        <h3>Key Derivation</h3>
+        <p>User-provided passwords or keys are processed using <strong>PBKDF2</strong> (Password-Based Key Derivation Function 2) with the following parameters:</p>
+        <ul>
+          <li><strong>Iterations</strong>: 100,000 rounds to slow down brute-force attacks</li>
+          <li><strong>Salt</strong>: A unique salt is generated for each key</li>
+          <li><strong>Hash Function</strong>: SHA-256 for the underlying hash operations</li>
+          <li><strong>Output Key Length</strong>: 256 bits (32 bytes)</li>
+        </ul>
+        
+        <h3>File Format</h3>
+        <p>Encrypted files use the <code>.fbz</code> extension and have the following structure:</p>
+        <ul>
+          <li><strong>IV</strong> (12 bytes): Initialization Vector for AES-GCM</li>
+          <li><strong>Auth Tag</strong> (16 bytes): Authentication tag for verifying integrity</li>
+          <li><strong>Encrypted Data</strong> (variable length): The encrypted content</li>
+        </ul>
+      </div>
+      
+      <div class="docs-section" id="key-management">
+        <h2>Key Management</h2>
+        <p>Proper key management is critical for maintaining the security of your encrypted data:</p>
+        
+        <h3>Choosing Strong Keys</h3>
+        <p>Always use strong, high-entropy keys:</p>
+        <ul>
+          <li>Use at least 16 characters for password-based keys</li>
+          <li>Include a mix of uppercase, lowercase, numbers, and special characters</li>
+          <li>Avoid dictionary words, names, or predictable patterns</li>
+          <li>Consider using a password manager to generate and store keys</li>
+        </ul>
+        
+        <h3>Storing Keys Securely</h3>
+        <p>Never store encryption keys in plaintext or in your source code:</p>
+        <ul>
+          <li><strong>Environment Variables</strong>: Use environment variables for development and production</li>
+          <li><strong>Secret Management Services</strong>: Use AWS Secrets Manager, Google Secret Manager, or HashiCorp Vault for production environments</li>
+          <li><strong>Hardware Security Modules (HSMs)</strong>: For high-security environments, consider using HSMs to store keys</li>
+        </ul>
+        
+        <h3>Using Environment Variables</h3>
+        <div class="code-block">
+          <pre><code># Set the encryption key as an environment variable
+export FROSTBITE_KEY="your-secure-encryption-key"
+
+# Use the environment variable in your application
+frostbite lock config.json --env FROSTBITE_KEY</code></pre>
+        </div>
+        
+        <h3>Using License Keys</h3>
+        <p>License keys provide an additional layer of security:</p>
+        <ul>
+          <li>They act as a second factor for encryption/decryption</li>
+          <li>They can be distributed separately from the main encryption key</li>
+          <li>They can be tied to specific environments or deployments</li>
+        </ul>
+        
+        <div class="code-block">
+          <pre><code># Using both a key and a license
+frostbite lock config.json --key mySecretKey --license my-license-key</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="best-practices">
+        <h2>Security Best Practices</h2>
+        <p>Follow these best practices to maintain a high level of security:</p>
+        
+        <h3>File Management</h3>
+        <ul>
+          <li><strong>Commit only encrypted files</strong>: Never commit decrypted sensitive files to your repository</li>
+          <li><strong>Use .gitignore</strong>: Add patterns to your .gitignore to prevent accidentally committing decrypted files</li>
+          <li><strong>Use .frostbiteignore</strong>: Create a .frostbiteignore file to specify which files should not be encrypted</li>
+        </ul>
+        
+        <h3>Memory Management</h3>
+        <ul>
+          <li><strong>Use the Runtime API</strong>: For live applications, use the Runtime API to decrypt files in memory without writing to disk</li>
+          <li><strong>Clear sensitive data</strong>: Clear sensitive data from memory when it's no longer needed</li>
+          <li><strong>Avoid logging sensitive data</strong>: Never log encryption keys or decrypted sensitive data</li>
+        </ul>
+        
+        <h3>Access Control</h3>
+        <ul>
+          <li><strong>Principle of least privilege</strong>: Only give access to encryption keys to those who need them</li>
+          <li><strong>Separate duties</strong>: Consider using different keys for different environments or types of data</li>
+          <li><strong>Audit access</strong>: Keep track of who has access to encryption keys and when they're used</li>
+        </ul>
+      </div>
+      
+      <div class="docs-section" id="ci-cd">
+        <h2>CI/CD Security</h2>
+        <p>Securely integrating Frostbite into your CI/CD pipeline:</p>
+        
+        <h3>Storing Secrets in CI/CD</h3>
+        <p>Most CI/CD platforms provide secure ways to store secrets:</p>
+        <ul>
+          <li><strong>GitHub Actions</strong>: Use repository secrets</li>
+          <li><strong>GitLab CI</strong>: Use CI/CD variables</li>
+          <li><strong>Jenkins</strong>: Use the Credentials plugin</li>
+          <li><strong>CircleCI</strong>: Use environment variables or contexts</li>
+        </ul>
+        
+        <h3>Example GitHub Actions Workflow</h3>
+        <div class="code-block">
+          <pre><code>name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Decrypt configuration
+        run: npx frostbite unlock config/production.json.fbz --key ${{ secrets.FROSTBITE_KEY }}
+        
+      - name: Build application
+        run: npm run build
+        
+      - name: Clean up decrypted files
+        run: |
+          find config -type f -not -name "*.fbz" -delete
+          
+      - name: Deploy
+        run: npm run deploy</code></pre>
+        </div>
+        
+        <h3>Temporary Decryption</h3>
+        <p>In CI/CD pipelines, decrypt files only when needed and clean up afterward:</p>
+        <ul>
+          <li>Decrypt files just before they're needed</li>
+          <li>Remove decrypted files as soon as they're no longer needed</li>
+          <li>Use separate build stages to isolate decrypted files</li>
+        </ul>
+      </div>
+      
+      <div class="docs-section" id="key-rotation">
+        <h2>Key Rotation</h2>
+        <p>Regularly rotating encryption keys is a security best practice:</p>
+        
+        <h3>When to Rotate Keys</h3>
+        <ul>
+          <li><strong>Regularly scheduled rotation</strong>: Every 90-180 days</li>
+          <li><strong>After personnel changes</strong>: When someone with key access leaves the team</li>
+          <li><strong>After a suspected breach</strong>: If you suspect a key may have been compromised</li>
+          <li><strong>When upgrading security</strong>: When moving to a more secure key management system</li>
+        </ul>
+        
+        <h3>Key Rotation Process</h3>
+        <p>Frostbite provides the <code>rekey</code> command to simplify key rotation:</p>
+        
+        <div class="code-block">
+          <pre><code># Re-encrypt files with a new key
+frostbite rekey config/ --old-key oldSecretKey --new-key newSecretKey
+
+# Using environment variables
+export OLD_KEY="old-secret-key"
+export NEW_KEY="new-secret-key"
+frostbite rekey config/ --old-env OLD_KEY --new-env NEW_KEY</code></pre>
+        </div>
+        
+        <h3>Programmatic Key Rotation</h3>
+        <div class="code-block">
+          <pre><code>const frostbite = require('frostbite');
+
+async function rotateKeys() {
+  try {
+    const result = await frostbite.rekey('./sensitive-data', {
+      oldKey: process.env.OLD_FROSTBITE_KEY,
+      newKey: process.env.NEW_FROSTBITE_KEY,
+      oldLicense: process.env.OLD_LICENSE,
+      newLicense: process.env.NEW_LICENSE
+    });
+    
+    console.log(`Re-encrypted ${result.files.length} files with new key`);
+  } catch (error) {
+    console.error('Key rotation failed:', error);
+  }
+}</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="threat-model">
+        <h2>Threat Model</h2>
+        <p>Understanding the security guarantees and limitations of Frostbite:</p>
+        
+        <h3>What Frostbite Protects Against</h3>
+        <ul>
+          <li><strong>Data at rest exposure</strong>: Protects sensitive files stored in repositories or on disk</li>
+          <li><strong>Unauthorized access</strong>: Prevents access without the correct encryption key</li>
+          <li><strong>Accidental exposure</strong>: Reduces the risk of accidentally committing sensitive data</li>
+          <li><strong>Data integrity violations</strong>: Detects if encrypted files have been tampered with</li>
+        </ul>
+        
+        <h3>Limitations</h3>
+        <ul>
+          <li><strong>Data in use</strong>: Once decrypted in memory, data protection depends on your application's security</li>
+          <li><strong>Key security</strong>: Frostbite can't protect against compromised encryption keys</li>
+          <li><strong>Memory attacks</strong>: Doesn't protect against memory dumping or side-channel attacks</li>
+          <li><strong>Malicious code</strong>: Doesn't protect against malicious code that has access to your application's memory</li>
+        </ul>
+        
+        <h3>Complementary Security Measures</h3>
+        <p>Frostbite should be part of a comprehensive security strategy:</p>
+        <ul>
+          <li><strong>Access controls</strong>: Implement proper authentication and authorization</li>
+          <li><strong>Network security</strong>: Use TLS/SSL for data in transit</li>
+          <li><strong>Secure coding practices</strong>: Follow secure coding guidelines to prevent vulnerabilities</li>
+          <li><strong>Regular security audits</strong>: Conduct security reviews and penetration testing</li>
+          <li><strong>Monitoring and logging</strong>: Implement monitoring to detect suspicious activity</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/frostbite-logo-64.png" alt="Frostbite Logo">
+          <span>Frostbite</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Project</h4>
+            <ul>
+              <li><a href="https://github.com/flash-install-cli/FrostBite">GitHub</a></li>
+              <li><a href="https://www.npmjs.com/package/frostbite">npm</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/issues">Issues</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/releases">Releases</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Documentation</h4>
+            <ul>
+              <li><a href="cli.html">CLI Reference</a></li>
+              <li><a href="api.html">API Reference</a></li>
+              <li><a href="runtime.html">Runtime API</a></li>
+              <li><a href="security.html">Security Guide</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/discussions">Discussions</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/blob/main/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Frostbite. Released under the MIT License.</p>
+        <div class="social-links">
+          <a href="https://github.com/flash-install-cli/FrostBite"><i class="fab fa-github"></i></a>
+          <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

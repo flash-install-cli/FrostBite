@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Runtime API - Frostbite</title>
+  <meta name="description" content="Documentation for the Frostbite Runtime API for live project integration.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon.ico">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/docs.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="../index.html">
+            <img src="../images/frostbite-logo-64.png" alt="Frostbite Logo">
+            <span>Frostbite</span>
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#usage">Usage</a></li>
+          <li><a href="../index.html#examples">Examples</a></li>
+          <li><a href="../index.html#docs">Documentation</a></li>
+          <li><a href="https://github.com/flash-install-cli/FrostBite" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+        </ul>
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Documentation Content -->
+  <div class="docs-container">
+    <aside class="docs-sidebar">
+      <div class="docs-nav">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="cli.html">CLI Reference</a></li>
+          <li><a href="api.html">API Reference</a></li>
+          <li class="active"><a href="runtime.html">Runtime API</a></li>
+          <li><a href="security.html">Security Guide</a></li>
+        </ul>
+        
+        <h4>Runtime Methods</h4>
+        <ul>
+          <li><a href="#createRuntime">createRuntime()</a></li>
+          <li><a href="#initialize">initialize()</a></li>
+          <li><a href="#decryptFile">decryptFile()</a></li>
+          <li><a href="#requireJSON">requireJSON()</a></li>
+          <li><a href="#watch">watch()</a></li>
+          <li><a href="#unwatch">unwatch()</a></li>
+          <li><a href="#clearCache">clearCache()</a></li>
+          <li><a href="#close">close()</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+    <main class="docs-content">
+      <h1>Runtime API</h1>
+      <p class="docs-intro">
+        The Frostbite Runtime API provides specialized functionality for using encrypted files in live project environments.
+        It allows you to decrypt files in memory without writing sensitive data to disk, watch files for changes, and more.
+      </p>
+      
+      <div class="docs-section" id="createRuntime">
+        <h2>createRuntime()</h2>
+        <p>Creates a new FrostbiteRuntime instance for live project environments.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>const frostbite = require('frostbite');
+
+const runtime = frostbite.createRuntime(options);</code></pre>
+        </div>
+        
+        <h3>Parameters</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>options</code></td>
+              <td>object</td>
+              <td>Runtime options</td>
+            </tr>
+            <tr>
+              <td><code>options.key</code></td>
+              <td>string</td>
+              <td>Encryption/decryption key</td>
+            </tr>
+            <tr>
+              <td><code>options.license</code></td>
+              <td>string</td>
+              <td>(Optional) License key for additional protection</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Return Value</h3>
+        <p>Returns a FrostbiteRuntime instance with the methods described in this documentation.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>const frostbite = require('frostbite');
+
+// Create a runtime instance
+const runtime = frostbite.createRuntime({
+  key: process.env.FROSTBITE_KEY,
+  license: process.env.FROSTBITE_LICENSE
+});</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="initialize">
+        <h2>initialize()</h2>
+        <p>Initializes the runtime by deriving the encryption key.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>await runtime.initialize();</code></pre>
+        </div>
+        
+        <h3>Return Value</h3>
+        <p>Returns a Promise that resolves to the runtime instance for chaining.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>const runtime = frostbite.createRuntime({
+  key: process.env.FROSTBITE_KEY
+});
+
+// Initialize the runtime
+await runtime.initialize();</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="decryptFile">
+        <h2>decryptFile()</h2>
+        <p>Decrypts a file and returns its contents without writing to disk.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>const content = await runtime.decryptFile(filePath, options);</code></pre>
+        </div>
+        
+        <h3>Parameters</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>filePath</code></td>
+              <td>string</td>
+              <td>Path to the encrypted file</td>
+            </tr>
+            <tr>
+              <td><code>options</code></td>
+              <td>object</td>
+              <td>(Optional) Decryption options</td>
+            </tr>
+            <tr>
+              <td><code>options.cache</code></td>
+              <td>boolean</td>
+              <td>(Optional) Whether to cache the decrypted content (default: true)</td>
+            </tr>
+            <tr>
+              <td><code>options.encoding</code></td>
+              <td>string</td>
+              <td>(Optional) Encoding to use for the decrypted content (e.g., 'utf8')</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Return Value</h3>
+        <p>Returns a Promise that resolves to a Buffer containing the decrypted content, or a string if an encoding is specified.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>// Initialize the runtime
+await runtime.initialize();
+
+// Decrypt a file as a buffer
+const binaryContent = await runtime.decryptFile('./config/binary-data.bin.fbz');
+
+// Decrypt a file as text
+const textContent = await runtime.decryptFile('./config/text-file.txt.fbz', {
+  encoding: 'utf8'
+});</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="requireJSON">
+        <h2>requireJSON()</h2>
+        <p>Decrypts a JSON file and parses its contents.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>const jsonData = await runtime.requireJSON(filePath, options);</code></pre>
+        </div>
+        
+        <h3>Parameters</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>filePath</code></td>
+              <td>string</td>
+              <td>Path to the JSON file (with or without .fbz extension)</td>
+            </tr>
+            <tr>
+              <td><code>options</code></td>
+              <td>object</td>
+              <td>(Optional) Decryption options</td>
+            </tr>
+            <tr>
+              <td><code>options.cache</code></td>
+              <td>boolean</td>
+              <td>(Optional) Whether to cache the decrypted content (default: true)</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Return Value</h3>
+        <p>Returns a Promise that resolves to the parsed JSON object.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>// Initialize the runtime
+await runtime.initialize();
+
+// Load and parse a JSON configuration file
+const config = await runtime.requireJSON('./config/production.json.fbz');
+
+console.log(`Database URL: ${config.database.url}`);
+console.log(`API Key: ${config.apiKey}`);</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="watch">
+        <h2>watch()</h2>
+        <p>Watches a file or directory for changes and automatically encrypts/decrypts files.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>const watcher = await runtime.watch(targetPath, options);</code></pre>
+        </div>
+        
+        <h3>Parameters</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>targetPath</code></td>
+              <td>string</td>
+              <td>Path to the file or directory to watch</td>
+            </tr>
+            <tr>
+              <td><code>options</code></td>
+              <td>object</td>
+              <td>(Optional) Watch options</td>
+            </tr>
+            <tr>
+              <td><code>options.autoDecrypt</code></td>
+              <td>boolean</td>
+              <td>(Optional) Automatically decrypt files when they change (default: true)</td>
+            </tr>
+            <tr>
+              <td><code>options.autoEncrypt</code></td>
+              <td>boolean</td>
+              <td>(Optional) Automatically encrypt files when they change (default: false)</td>
+            </tr>
+            <tr>
+              <td><code>options.onChange</code></td>
+              <td>function</td>
+              <td>(Optional) Callback function when a file changes</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Return Value</h3>
+        <p>Returns a Promise that resolves to a watcher object.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>// Initialize the runtime
+await runtime.initialize();
+
+// Watch a directory for changes
+await runtime.watch('./config', {
+  autoDecrypt: true,  // Decrypt files when they change
+  autoEncrypt: true,  // Encrypt files when they change
+  onChange: (action, filePath, content) => {
+    console.log(`File ${filePath} was ${action}ed`);
+    
+    // Reload configuration if needed
+    if (filePath.includes('config.json')) {
+      // Handle configuration change
+    }
+  }
+});</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="unwatch">
+        <h2>unwatch()</h2>
+        <p>Stops watching a file or directory.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>await runtime.unwatch(targetPath);</code></pre>
+        </div>
+        
+        <h3>Parameters</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>targetPath</code></td>
+              <td>string</td>
+              <td>Path to stop watching</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Return Value</h3>
+        <p>Returns a Promise that resolves when the watcher is closed.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>// Start watching
+await runtime.watch('./config');
+
+// Later, stop watching
+await runtime.unwatch('./config');</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="clearCache">
+        <h2>clearCache()</h2>
+        <p>Clears the decrypted content cache.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>runtime.clearCache();</code></pre>
+        </div>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>// Clear the cache to force re-decryption on next access
+runtime.clearCache();</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="close">
+        <h2>close()</h2>
+        <p>Closes the runtime and cleans up resources.</p>
+        
+        <h3>Syntax</h3>
+        <div class="code-block">
+          <pre><code>await runtime.close();</code></pre>
+        </div>
+        
+        <h3>Return Value</h3>
+        <p>Returns a Promise that resolves when all resources are cleaned up.</p>
+        
+        <h3>Example</h3>
+        <div class="code-block">
+          <pre><code>// When shutting down the application
+process.on('SIGTERM', async () => {
+  console.log('Shutting down...');
+  
+  // Close the runtime to clean up resources
+  await runtime.close();
+  
+  process.exit(0);
+});</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section">
+        <h2>Live Project Example</h2>
+        <p>Here's a complete example of using the Runtime API in a live project:</p>
+        
+        <div class="code-block">
+          <pre><code>const express = require('express');
+const frostbite = require('frostbite');
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Create a runtime instance
+const runtime = frostbite.createRuntime({
+  key: process.env.FROSTBITE_KEY
+});
+
+async function startServer() {
+  // Initialize the runtime
+  await runtime.initialize();
+  
+  try {
+    // Load configuration
+    const config = await runtime.requireJSON('./config/production.json');
+    
+    // Set up middleware
+    app.use(express.json());
+    
+    // Set up routes
+    app.get('/api/status', (req, res) => {
+      res.json({ status: 'ok' });
+    });
+    
+    // Start watching for configuration changes
+    await runtime.watch('./config', {
+      autoDecrypt: true,
+      onChange: async (action, filePath) => {
+        if (filePath.includes('production.json')) {
+          console.log('Configuration changed, reloading...');
+          
+          // Reload configuration
+          const newConfig = await runtime.requireJSON('./config/production.json', {
+            cache: false  // Force re-reading the file
+          });
+          
+          // Update application with new configuration
+          // ...
+        }
+      }
+    });
+    
+    // Start the server
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+    
+    // Handle graceful shutdown
+    process.on('SIGTERM', async () => {
+      console.log('Shutting down...');
+      await runtime.close();
+      process.exit(0);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();</code></pre>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/frostbite-logo-64.png" alt="Frostbite Logo">
+          <span>Frostbite</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Project</h4>
+            <ul>
+              <li><a href="https://github.com/flash-install-cli/FrostBite">GitHub</a></li>
+              <li><a href="https://www.npmjs.com/package/frostbite">npm</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/issues">Issues</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/releases">Releases</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Documentation</h4>
+            <ul>
+              <li><a href="cli.html">CLI Reference</a></li>
+              <li><a href="api.html">API Reference</a></li>
+              <li><a href="runtime.html">Runtime API</a></li>
+              <li><a href="security.html">Security Guide</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/discussions">Discussions</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/blob/main/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/flash-install-cli/FrostBite/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Frostbite. Released under the MIT License.</p>
+        <div class="social-links">
+          <a href="https://github.com/flash-install-cli/FrostBite"><i class="fab fa-github"></i></a>
+          <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

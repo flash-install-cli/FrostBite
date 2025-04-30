@@ -39,10 +39,10 @@ Frostbite is a powerful file encryption utility that selectively encrypts and de
 
 ```bash
 # Install globally
-npm install -g frostbite
+npm install -g frostbite-encrypt
 
 # Or install as a project dependency
-npm install --save frostbite
+npm install --save frostbite-encrypt
 ```
 
 ## CLI Usage

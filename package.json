@@ -1,0 +1,40 @@
+{
+  "name": "frostbite",
+  "version": "1.0.0",
+  "description": "Selectively encrypt and decrypt files or folders to protect sensitive code or assets",
+  "main": "index.js",
+  "bin": {
+    "frostbite": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "encryption",
+    "security",
+    "file-encryption",
+    "protection",
+    "aes-256",
+    "crypto"
+  ],
+  "author": "FrostBite Team",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "cli-progress": "^3.11.2",
+    "commander": "^9.4.0",
+    "figures": "^3.2.0",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
+    "inquirer": "^8.2.4",
+    "ora": "^5.4.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "canvas": "^3.1.0",
+    "svg2img": "^1.0.0-beta.2"
+  }
+}

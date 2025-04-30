@@ -1,0 +1,14 @@
+{
+  "name": "frostbite-live-project-example",
+  "version": "1.0.0",
+  "description": "Example of using FrostBite in a live project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "encrypt-config": "frostbite lock config.json --key example-key-123",
+    "decrypt-config": "frostbite unlock config.json --key example-key-123"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

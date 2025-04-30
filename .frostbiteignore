@@ -1,0 +1,23 @@
+# FrostBite ignore file
+# Files and directories matching these patterns will not be encrypted
+
+# Common directories to ignore
+node_modules/**
+.git/**
+dist/**
+build/**
+coverage/**
+
+# Common files to ignore
+package-lock.json
+yarn.lock
+.DS_Store
+.env
+.env.*
+*.log
+
+# Already encrypted files
+**/*.fbz
+
+# This file itself
+.frostbiteignore

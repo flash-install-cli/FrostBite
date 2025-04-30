@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frostbite - Selective File Encryption</title>
+  <meta name="description" content="Frostbite is a powerful file encryption utility that selectively encrypts and decrypts files or folders to protect sensitive code or assets.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="images/frostbite-logo-64.png" alt="Frostbite Logo">
+          <span>Frostbite</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#usage">Usage</a></li>
+          <li><a href="#examples">Examples</a></li>
+          <li><a href="#docs">Documentation</a></li>
+          <li><a href="https://github.com/yourusername/frostbite" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+        </ul>
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Protect Your Sensitive Files with <span class="highlight">Frostbite</span></h1>
+        <p class="subtitle">A powerful Node.js utility for selective file encryption that keeps your sensitive data secure.</p>
+        <div class="cta-buttons">
+          <a href="#installation" class="btn btn-primary">Get Started</a>
+          <a href="https://github.com/yourusername/frostbite" class="btn btn-secondary"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/frostbite-logo-256.png" alt="Frostbite Logo">
+        <div class="frost-effect"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Strong Encryption</h3>
+          <p>AES-256-GCM encryption with secure key derivation using PBKDF2 with salt.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-folder-open"></i>
+          </div>
+          <h3>Selective Encryption</h3>
+          <p>Encrypt individual files or entire directories with customizable ignore patterns.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-key"></i>
+          </div>
+          <h3>License Key Binding</h3>
+          <p>Add an extra layer of security with optional license key binding.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <h3>Key Rotation</h3>
+          <p>Easily re-encrypt files with a new key to maintain security best practices.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-eye-slash"></i>
+          </div>
+          <h3>Memory-Only Decryption</h3>
+          <p>Decrypt files in memory without writing sensitive data to disk.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-desktop"></i>
+          </div>
+          <h3>Live Project Support</h3>
+          <p>Seamlessly integrate with live applications using the runtime API.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Section -->
+  <section id="installation" class="installation">
+    <div class="container">
+      <h2>Installation</h2>
+      <div class="installation-options">
+        <div class="install-card">
+          <h3>Global Installation</h3>
+          <div class="code-block">
+            <pre><code>npm install -g frostbite</code></pre>
+            <button class="copy-btn" data-clipboard-text="npm install -g frostbite">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+          <p>Install globally to use the CLI commands from anywhere.</p>
+        </div>
+        <div class="install-card">
+          <h3>Project Installation</h3>
+          <div class="code-block">
+            <pre><code>npm install --save frostbite</code></pre>
+            <button class="copy-btn" data-clipboard-text="npm install --save frostbite">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+          <p>Install as a project dependency to use the programmatic API.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Section -->
+  <section id="usage" class="usage">
+    <div class="container">
+      <h2>Usage</h2>
+      <div class="usage-tabs">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="cli">CLI</button>
+          <button class="tab-btn" data-tab="api">API</button>
+          <button class="tab-btn" data-tab="runtime">Runtime</button>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="cli">
+            <h3>Command Line Interface</h3>
+            <div class="code-block">
+              <pre><code># Encrypt a file or directory
+frostbite lock path/to/sensitive --key mySecretKey
+
+# Decrypt a file or directory
+frostbite unlock path/to/sensitive.fbz --key mySecretKey
+
+# Re-encrypt with a new key
+frostbite rekey path/to/sensitive.fbz --old-key oldKey --new-key newKey
+
+# Watch files for changes (live project mode)
+frostbite watch path/to/directory --key mySecretKey</code></pre>
+              <button class="copy-btn" data-clipboard-text="# Encrypt a file or directory
+frostbite lock path/to/sensitive --key mySecretKey
+
+# Decrypt a file or directory
+frostbite unlock path/to/sensitive.fbz --key mySecretKey
+
+# Re-encrypt with a new key
+frostbite rekey path/to/sensitive.fbz --old-key oldKey --new-key newKey
+
+# Watch files for changes (live project mode)
+frostbite watch path/to/directory --key mySecretKey">
+                <i class="far fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="tab-pane" id="api">
+            <h3>Programmatic API</h3>
+            <div class="code-block">
+              <pre><code>const frostbite = require('frostbite');
+
+// Encrypt a file or directory
+await frostbite.encrypt('path/to/sensitive', {
+  key: 'mySecretKey',
+  license: 'optional-license'
+});
+
+// Decrypt a file or directory
+await frostbite.decrypt('path/to/sensitive.fbz', {
+  key: 'mySecretKey',
+  license: 'optional-license'
+});
+
+// Re-encrypt with a new key
+await frostbite.rekey('path/to/sensitive.fbz', {
+  oldKey: 'oldSecretKey',
+  newKey: 'newSecretKey'
+});</code></pre>
+              <button class="copy-btn" data-clipboard-text="const frostbite = require('frostbite');
+
+// Encrypt a file or directory
+await frostbite.encrypt('path/to/sensitive', {
+  key: 'mySecretKey',
+  license: 'optional-license'
+});
+
+// Decrypt a file or directory
+await frostbite.decrypt('path/to/sensitive.fbz', {
+  key: 'mySecretKey',
+  license: 'optional-license'
+});
+
+// Re-encrypt with a new key
+await frostbite.rekey('path/to/sensitive.fbz', {
+  oldKey: 'oldSecretKey',
+  newKey: 'newSecretKey'
+});">
+                <i class="far fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="tab-pane" id="runtime">
+            <h3>Runtime API for Live Projects</h3>
+            <div class="code-block">
+              <pre><code>const frostbite = require('frostbite');
+
+// Create a runtime instance
+const runtime = frostbite.createRuntime({
+  key: process.env.FROSTBITE_KEY
+});
+
+// Initialize the runtime
+await runtime.initialize();
+
+// Decrypt a file without writing to disk
+const config = await runtime.requireJSON('./config.json.fbz');
+
+// Watch files for changes
+await runtime.watch('./config', {
+  autoDecrypt: true,
+  autoEncrypt: true
+});</code></pre>
+              <button class="copy-btn" data-clipboard-text="const frostbite = require('frostbite');
+
+// Create a runtime instance
+const runtime = frostbite.createRuntime({
+  key: process.env.FROSTBITE_KEY
+});
+
+// Initialize the runtime
+await runtime.initialize();
+
+// Decrypt a file without writing to disk
+const config = await runtime.requireJSON('./config.json.fbz');
+
+// Watch files for changes
+await runtime.watch('./config', {
+  autoDecrypt: true,
+  autoEncrypt: true
+});">
+                <i class="far fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples Section -->
+  <section id="examples" class="examples">
+    <div class="container">
+      <h2>Examples</h2>
+      <div class="examples-grid">
+        <div class="example-card">
+          <h3>Encrypting Configuration Files</h3>
+          <p>Keep your sensitive configuration files secure while still allowing your application to access them.</p>
+          <a href="https://github.com/yourusername/frostbite/tree/main/examples/config-encryption" class="example-link">View Example <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="example-card">
+          <h3>Live Project Integration</h3>
+          <p>See how to integrate Frostbite into a live Node.js application with automatic configuration reloading.</p>
+          <a href="https://github.com/yourusername/frostbite/tree/main/examples/live-project" class="example-link">View Example <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="example-card">
+          <h3>CI/CD Pipeline Integration</h3>
+          <p>Learn how to securely manage encrypted files in your continuous integration and deployment workflows.</p>
+          <a href="https://github.com/yourusername/frostbite/tree/main/examples/ci-cd-integration" class="example-link">View Example <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documentation Section -->
+  <section id="docs" class="documentation">
+    <div class="container">
+      <h2>Documentation</h2>
+      <div class="docs-grid">
+        <a href="docs/cli.html" class="docs-card">
+          <h3>CLI Reference</h3>
+          <p>Complete documentation for all command line interface options and flags.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="docs/api.html" class="docs-card">
+          <h3>API Reference</h3>
+          <p>Detailed API documentation for programmatic usage in your applications.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="docs/runtime.html" class="docs-card">
+          <h3>Runtime API</h3>
+          <p>Learn how to use the runtime API for live project integration.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="docs/security.html" class="docs-card">
+          <h3>Security Guide</h3>
+          <p>Best practices for managing encryption keys and securing your data.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/frostbite-logo-64.png" alt="Frostbite Logo">
+          <span>Frostbite</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Project</h4>
+            <ul>
+              <li><a href="https://github.com/yourusername/frostbite">GitHub</a></li>
+              <li><a href="https://www.npmjs.com/package/frostbite">npm</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/issues">Issues</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/releases">Releases</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Documentation</h4>
+            <ul>
+              <li><a href="docs/cli.html">CLI Reference</a></li>
+              <li><a href="docs/api.html">API Reference</a></li>
+              <li><a href="docs/runtime.html">Runtime API</a></li>
+              <li><a href="docs/security.html">Security Guide</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://github.com/yourusername/frostbite/discussions">Discussions</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/blob/main/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Frostbite. Released under the MIT License.</p>
+        <div class="social-links">
+          <a href="https://github.com/yourusername/frostbite"><i class="fab fa-github"></i></a>
+          <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

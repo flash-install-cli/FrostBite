@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLI Reference - Frostbite</title>
+  <meta name="description" content="Complete documentation for the Frostbite command line interface.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon.ico">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/docs.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="../index.html">
+            <img src="../images/frostbite-logo-64.png" alt="Frostbite Logo">
+            <span>Frostbite</span>
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#usage">Usage</a></li>
+          <li><a href="../index.html#examples">Examples</a></li>
+          <li><a href="../index.html#docs">Documentation</a></li>
+          <li><a href="https://github.com/yourusername/frostbite" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+        </ul>
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Documentation Content -->
+  <div class="docs-container">
+    <aside class="docs-sidebar">
+      <div class="docs-nav">
+        <h3>Documentation</h3>
+        <ul>
+          <li class="active"><a href="cli.html">CLI Reference</a></li>
+          <li><a href="api.html">API Reference</a></li>
+          <li><a href="runtime.html">Runtime API</a></li>
+          <li><a href="security.html">Security Guide</a></li>
+        </ul>
+        
+        <h4>CLI Commands</h4>
+        <ul>
+          <li><a href="#lock">lock</a></li>
+          <li><a href="#unlock">unlock</a></li>
+          <li><a href="#rekey">rekey</a></li>
+          <li><a href="#watch">watch</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+    <main class="docs-content">
+      <h1>CLI Reference</h1>
+      <p class="docs-intro">
+        Frostbite provides a powerful command line interface for encrypting, decrypting, and managing encrypted files.
+        This reference documents all available commands and options.
+      </p>
+      
+      <div class="docs-section" id="lock">
+        <h2>lock</h2>
+        <p>Encrypts a file or directory using AES-256-GCM encryption.</p>
+        
+        <h3>Usage</h3>
+        <div class="code-block">
+          <pre><code>frostbite lock &lt;path&gt; [options]</code></pre>
+        </div>
+        
+        <h3>Arguments</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Argument</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;path&gt;</code></td>
+              <td>Path to the file or directory to encrypt</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Options</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>-k, --key &lt;key&gt;</code></td>
+              <td>Encryption key (will prompt if not provided)</td>
+            </tr>
+            <tr>
+              <td><code>-e, --env &lt;variable&gt;</code></td>
+              <td>Environment variable containing the encryption key</td>
+            </tr>
+            <tr>
+              <td><code>-l, --license &lt;license&gt;</code></td>
+              <td>License key for additional protection</td>
+            </tr>
+            <tr>
+              <td><code>-d, --dry-run</code></td>
+              <td>Show what would be encrypted without making changes</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Examples</h3>
+        <div class="code-block">
+          <pre><code># Encrypt a file
+frostbite lock config.json --key mySecretKey
+
+# Encrypt a directory
+frostbite lock ./src/config --key mySecretKey
+
+# Use environment variable for key
+export FROST_KEY=mySecretKey
+frostbite lock config.json --env FROST_KEY
+
+# Add license key binding
+frostbite lock config.json --key mySecretKey --license my-license-key
+
+# Preview what would be encrypted
+frostbite lock ./src --dry-run</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="unlock">
+        <h2>unlock</h2>
+        <p>Decrypts a file or directory that was encrypted with Frostbite.</p>
+        
+        <h3>Usage</h3>
+        <div class="code-block">
+          <pre><code>frostbite unlock &lt;path&gt; [options]</code></pre>
+        </div>
+        
+        <h3>Arguments</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Argument</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;path&gt;</code></td>
+              <td>Path to the file or directory to decrypt</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Options</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>-k, --key &lt;key&gt;</code></td>
+              <td>Decryption key (will prompt if not provided)</td>
+            </tr>
+            <tr>
+              <td><code>-e, --env &lt;variable&gt;</code></td>
+              <td>Environment variable containing the decryption key</td>
+            </tr>
+            <tr>
+              <td><code>-l, --license &lt;license&gt;</code></td>
+              <td>License key for additional protection</td>
+            </tr>
+            <tr>
+              <td><code>-d, --dry-run</code></td>
+              <td>Show what would be decrypted without making changes</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Examples</h3>
+        <div class="code-block">
+          <pre><code># Decrypt a file
+frostbite unlock config.json.fbz --key mySecretKey
+
+# Decrypt a directory
+frostbite unlock ./src/config --key mySecretKey
+
+# Use environment variable for key
+export FROST_KEY=mySecretKey
+frostbite unlock config.json.fbz --env FROST_KEY
+
+# With license key binding
+frostbite unlock config.json.fbz --key mySecretKey --license my-license-key
+
+# Preview what would be decrypted
+frostbite unlock ./src --dry-run</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="rekey">
+        <h2>rekey</h2>
+        <p>Re-encrypts files with a new key, allowing for key rotation without decrypting to disk.</p>
+        
+        <h3>Usage</h3>
+        <div class="code-block">
+          <pre><code>frostbite rekey &lt;path&gt; [options]</code></pre>
+        </div>
+        
+        <h3>Arguments</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Argument</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;path&gt;</code></td>
+              <td>Path to the file or directory to re-encrypt</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Options</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>-k, --old-key &lt;key&gt;</code></td>
+              <td>Old encryption key (will prompt if not provided)</td>
+            </tr>
+            <tr>
+              <td><code>-n, --new-key &lt;key&gt;</code></td>
+              <td>New encryption key (will prompt if not provided)</td>
+            </tr>
+            <tr>
+              <td><code>--old-env &lt;variable&gt;</code></td>
+              <td>Environment variable containing the old encryption key</td>
+            </tr>
+            <tr>
+              <td><code>--new-env &lt;variable&gt;</code></td>
+              <td>Environment variable containing the new encryption key</td>
+            </tr>
+            <tr>
+              <td><code>--old-license &lt;license&gt;</code></td>
+              <td>Old license key</td>
+            </tr>
+            <tr>
+              <td><code>--new-license &lt;license&gt;</code></td>
+              <td>New license key</td>
+            </tr>
+            <tr>
+              <td><code>-d, --dry-run</code></td>
+              <td>Show what would be re-encrypted without making changes</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Examples</h3>
+        <div class="code-block">
+          <pre><code># Re-encrypt a file
+frostbite rekey config.json.fbz --old-key oldSecret --new-key newSecret
+
+# Re-encrypt a directory
+frostbite rekey ./src/config --old-key oldSecret --new-key newSecret
+
+# Use environment variables for keys
+export OLD_KEY=oldSecret
+export NEW_KEY=newSecret
+frostbite rekey config.json.fbz --old-env OLD_KEY --new-env NEW_KEY
+
+# With license key binding
+frostbite rekey config.json.fbz --old-key oldSecret --new-key newSecret --old-license old-license --new-license new-license
+
+# Preview what would be re-encrypted
+frostbite rekey ./src --old-key oldSecret --new-key newSecret --dry-run</code></pre>
+        </div>
+      </div>
+      
+      <div class="docs-section" id="watch">
+        <h2>watch</h2>
+        <p>Watches files and automatically encrypts/decrypts them when they change. Ideal for live project environments.</p>
+        
+        <h3>Usage</h3>
+        <div class="code-block">
+          <pre><code>frostbite watch &lt;path&gt; [options]</code></pre>
+        </div>
+        
+        <h3>Arguments</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Argument</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;path&gt;</code></td>
+              <td>Path to the file or directory to watch</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Options</h3>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>-k, --key &lt;key&gt;</code></td>
+              <td>Encryption/decryption key (will prompt if not provided)</td>
+            </tr>
+            <tr>
+              <td><code>-e, --env &lt;variable&gt;</code></td>
+              <td>Environment variable containing the key</td>
+            </tr>
+            <tr>
+              <td><code>-l, --license &lt;license&gt;</code></td>
+              <td>License key for additional protection</td>
+            </tr>
+            <tr>
+              <td><code>--auto-encrypt</code></td>
+              <td>Automatically encrypt files when they change (default: false)</td>
+            </tr>
+            <tr>
+              <td><code>--auto-decrypt</code></td>
+              <td>Automatically decrypt files when they change (default: true)</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Examples</h3>
+        <div class="code-block">
+          <pre><code># Watch a directory and automatically decrypt files
+frostbite watch ./config --key mySecretKey
+
+# Watch with auto-encryption (both ways)
+frostbite watch ./config --key mySecretKey --auto-encrypt
+
+# Use environment variable for key
+export FROST_KEY=mySecretKey
+frostbite watch ./config --env FROST_KEY
+
+# With license key binding
+frostbite watch ./config --key mySecretKey --license my-license-key</code></pre>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/frostbite-logo-64.png" alt="Frostbite Logo">
+          <span>Frostbite</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Project</h4>
+            <ul>
+              <li><a href="https://github.com/yourusername/frostbite">GitHub</a></li>
+              <li><a href="https://www.npmjs.com/package/frostbite">npm</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/issues">Issues</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/releases">Releases</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Documentation</h4>
+            <ul>
+              <li><a href="cli.html">CLI Reference</a></li>
+              <li><a href="api.html">API Reference</a></li>
+              <li><a href="runtime.html">Runtime API</a></li>
+              <li><a href="security.html">Security Guide</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://github.com/yourusername/frostbite/discussions">Discussions</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/blob/main/CONTRIBUTING.md">Contributing</a></li>
+              <li><a href="https://github.com/yourusername/frostbite/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Frostbite. Released under the MIT License.</p>
+        <div class="social-links">
+          <a href="https://github.com/yourusername/frostbite"><i class="fab fa-github"></i></a>
+          <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

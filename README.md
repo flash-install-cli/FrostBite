@@ -304,6 +304,10 @@ You may need to log out and back in (or restart your file explorer) for the chan
 
 For more detailed documentation, visit our [GitHub Pages site](https://flash-install-cli.github.io/FrostBite/).
 
+## Future Updates
+
+We have an exciting roadmap planned for Frostbite! Check out our [Future Updates](FUTURE_UPDATES.md) document to see what features and improvements are coming in future versions.
+
 ## Security Notes
 
 - Store your encryption keys securely
